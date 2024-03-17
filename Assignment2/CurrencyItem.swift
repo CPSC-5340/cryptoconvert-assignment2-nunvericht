@@ -1,13 +1,13 @@
 //
-// ContentView.swift : Assignment2
+//  CurrencyItem.swift : Converter
+//  Assignment2
 //
-// Copyright © 2023 Auburn University.
-// All Rights Reserved.
-
+//  Created by Nicholl Unvericht on 3/17/24.
+//
 
 import SwiftUI
 
-struct ContentView: View {
+struct CurrencyItem: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,11 +16,5 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
