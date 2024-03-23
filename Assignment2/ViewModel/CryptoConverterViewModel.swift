@@ -49,8 +49,8 @@ class CryptoConverterViewModel : ObservableObject {
         guard let bitcoinAmount = Double(bitcoin) else {
             return String(updatedMultiplier * item.cardContent.multiplier)
         }
-        let updatedValue = String(bitcoinAmount * item.cardContent.multiplier)
+        let updatedValue = bitcoinAmount * item.cardContent.multiplier
         updatedMultiplier = bitcoinAmount
-        return updatedValue
+        return String(format: "%.2f", updatedValue)
     }
 }
