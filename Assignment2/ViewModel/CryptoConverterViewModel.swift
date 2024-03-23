@@ -27,16 +27,14 @@ class CryptoConverterViewModel : ObservableObject {
         ]
     }
     
-    // this function will update the listview but does not have same behavior as instructional video.
-    func updateCryptoItem(_ item: ConvertModel<CryptoItemModel>) -> ConvertModel<CryptoItemModel>? {
-        guard let bitcoinAmount = Double(bitcoin) else {
-            return item
+    // function for error checking out of index
+    func findIndex(item: ConvertModel<CryptoItemModel>) -> Int? {
+        for index in 0..<listOfCrypto.count {
+            if item.id == listOfCrypto[index].id {
+                return index
+            }
         }
-        let updatedMultiplier = item.cardContent.multiplier * bitcoinAmount
-        let updatedItem =  ConvertModel(cardContent: CryptoItemModel(cryptoName: item.cardContent.cryptoName,
-                                                                     cryptoCode: item.cardContent.cryptoCode,
-                                                                     multiplier: updatedMultiplier))
-        return updatedItem
+        return nil
     }
     
     // "getter" for cryptoName
@@ -44,13 +42,33 @@ class CryptoConverterViewModel : ObservableObject {
         return String(item.cardContent.cryptoName)
     }
     
-    // "setter" for Value (multiplier * bitcoinAmount)
-    func setValue (_ item: ConvertModel<CryptoItemModel>) -> String {
+    // "setter" for Value (multiplier * bitcoinAmount)  Performs error checking and stores the last valid value
+    func setValue (_ item: ConvertModel<CryptoItemModel>) -> Double {
         guard let bitcoinAmount = Double(bitcoin) else {
-            return String(updatedMultiplier * item.cardContent.multiplier)
+            let updatedValue = updatedMultiplier * item.cardContent.multiplier
+            return updatedValue
         }
         let updatedValue = bitcoinAmount * item.cardContent.multiplier
         updatedMultiplier = bitcoinAmount
-        return String(format: "%.2f", updatedValue)
+        return updatedValue
+    }
+    
+    // function to updateCryptoItem.  utilizes previous functions for error handling
+    func updateCryptoItem(_ item: ConvertModel<CryptoItemModel>) -> ConvertModel<CryptoItemModel>? {
+        
+        guard let index = findIndex(item: item) else {
+            return item
+        }
+
+        let updatedMultiplier = setValue(item)
+        let cryptoName = getCryptoName(item)
+        let updatedItem = ConvertModel(
+            cardContent: CryptoItemModel(
+                cryptoName: cryptoName,
+                cryptoCode: item.cardContent.cryptoCode,
+                multiplier: updatedMultiplier
+            )
+        )
+        return updatedItem
     }
 }

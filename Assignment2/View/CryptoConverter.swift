@@ -24,17 +24,8 @@ struct CryptoConverter: View {
                         .focused($textFocus)
                 }
                 .padding()
-                /*List(viewModel.listOfCrypto) {
+                List(viewModel.listOfCrypto) {
                     item in CryptoItem(item: viewModel.updateCryptoItem(item)!)
-                }*/
-                List {
-                    ForEach(viewModel.listOfCrypto) {
-                        item in HStack {
-                            Text(viewModel.getCryptoName(item))
-                            Spacer()
-                            Text(viewModel.setValue(item))
-                        }
-                    }
                 }
                 .listStyle(.grouped)
             }
