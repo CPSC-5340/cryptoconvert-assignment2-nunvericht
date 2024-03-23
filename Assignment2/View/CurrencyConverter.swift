@@ -1,8 +1,9 @@
 //
-// ContentView.swift : Assignment2
+// CurrencyConverter.swift : Assignment2
 //
 // Copyright © 2023 Auburn University.
 // All Rights Reserved.
+// modified by nju0004
 
 
 import SwiftUI
@@ -14,13 +15,14 @@ struct CurrencyConverter: View {
     var body: some View {
         ScrollView {
             Text("1 USD Exchange Rate")
-                .padding()
+            .padding()
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                ForEach(viewModel.listOfCards) {card in  CurrencyItem(card: card)
-                        .onTapGesture {
-                            viewModel.flip(card: card)
-                        }
+                ForEach(viewModel.listOfCards) {
+                    card in CurrencyItem(card: card)
+                    .onTapGesture {
+                        viewModel.flip(card: card)
                     }
+                }
             }
         }
         .onAppear {

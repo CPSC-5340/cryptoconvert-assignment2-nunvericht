@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct ConverterNavigation: View {
+struct ConvertNavigation: View {
     
     var converter = CurrencyConverter()
-    var crypto = CryptoView()
+    var crypto = CryptoConverter()
     
     var body: some View {
         NavigationStack {
@@ -18,11 +18,12 @@ struct ConverterNavigation: View {
                 NavigationLink("World Currency Exchange", destination: converter)
                 NavigationLink("Crypto Exchange", destination: crypto)
             }
+            .listStyle(.grouped)
             .navigationTitle("Conversion App")
         }
     }
 }
 
 #Preview {
-    ConverterNavigation()
+    ConvertNavigation()
 }

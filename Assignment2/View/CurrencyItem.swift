@@ -30,11 +30,13 @@ struct FrontCurrencyItem: View {
         VStack {
             HStack {
                 Text(card.countryFlag)
+                    .font(.title)
                 Spacer()
             }
             HStack {
                 Spacer()
                 Text(card.currencyCode)
+                    .font(.title)
             }
         }
         .frame(width: 130, height: 130)
@@ -56,6 +58,7 @@ struct BackCurrencyItem: View {
             HStack {
                 Spacer()
                 Text(String(card.multiplier))
+                    .font(.title)
             }
         }
         .frame(width: 130, height: 130)
@@ -63,7 +66,6 @@ struct BackCurrencyItem: View {
         .background(.blue)
     }
 }
-
 
 #Preview {
     CurrencyItem(card: ConvertModel(cardContent: CurrencyItemModel(currencyName: "Chilean Peso", currencyCode: "CLP", countryFlag: "🇨🇱", multiplier: 941.43)))
